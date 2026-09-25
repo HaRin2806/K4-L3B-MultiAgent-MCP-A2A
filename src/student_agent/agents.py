@@ -198,13 +198,11 @@ class OrderItemAgent:
         actor = "order-agent"
         topic = ctx.target_topic
 
-        # Only query items when relevant: seller/logistics delays, unavailable order, payment mismatch
+        # Only query items when relevant: seller delays, unavailable order, payment mismatch
         needs_items = topic in [
             "late_delivery_seller",
-            "late_delivery_logistics",
             "unavailable_order_paid",
             "payment_mismatch",
-            "canceled_order_paid",
         ]
 
         if needs_items:
@@ -215,8 +213,8 @@ class OrderItemAgent:
                 ctx.items_data = items_res["data"]
                 ctx.record_evidence("get_order_items", items_res, actor=actor)
 
-        # Only query sellers when seller liability is in question
-        needs_sellers = topic in ["late_delivery_seller"]
+        # Only query sellers when seller liability is in question (seller delay, unavailable order)
+        needs_sellers = topic in ["late_delivery_seller", "unavailable_order_paid"]
         if needs_sellers:
             sellers_res = await call_gateway_with_retry(
                 ctx.gateway, "get_sellers", case_id=ctx.case_id, order_id=order_id
@@ -362,7 +360,7 @@ class PaymentAgent:
             "canceled_order_paid",
             "unavailable_order_paid",
         ]
-        needs_payment_timeline = topic in ["duplicate_charge", "payment_mismatch"]
+        needs_payment_timeline = topic in ["duplicate_charge"]
         needs_refund_timeline = topic in ["refund_pending", "refund_failed"]
 
         captured_total = 0.0
@@ -490,7 +488,7 @@ class PolicyAgent:
             "confidence": calibrated_confidence,
         }
 
-        # 3. Assess each claim
+        # 3. Assess each claim with precise domain-relevant evidence
         claim_assessments: list[dict[str, Any]] = []
         for c in claims:
             c_id = c.get("claim_id", "")
@@ -500,18 +498,42 @@ class PolicyAgent:
                     c_verdict = "supported"
                 else:
                     c_verdict = "unsupported"
+                rel_domains = ["order", "policy", "payment"]
             else:
                 if primary_issue != "unsupported_claim":
                     c_verdict = "supported"
                 else:
                     c_verdict = "unsupported"
 
+                if topic == "late_delivery_logistics":
+                    rel_domains = ["order", "shipment"]
+                elif topic == "late_delivery_seller":
+                    rel_domains = ["order", "item", "seller", "shipment"]
+                elif topic in ["canceled_order_paid", "duplicate_charge", "valid_split_payment"]:
+                    rel_domains = ["order", "payment"]
+                elif topic == "unavailable_order_paid":
+                    rel_domains = ["order", "item", "seller", "payment"]
+                elif topic == "payment_mismatch":
+                    rel_domains = ["order", "item", "payment"]
+                elif topic in ["refund_pending", "refund_failed"]:
+                    rel_domains = ["order", "payment", "refund"]
+                else:
+                    rel_domains = ["order", "shipment"]
+
+            claim_refs: list[str] = []
+            for d in rel_domains:
+                for ref in ctx.evidence_by_domain.get(d, []):
+                    if ref not in claim_refs:
+                        claim_refs.append(ref)
+            if not claim_refs:
+                claim_refs = ctx.evidence_refs[:3]
+
             claim_assessments.append(
                 {
                     "claim_id": c_id,
                     "verdict": c_verdict,
                     "confidence": 0.95,
-                    "evidence_refs": ctx.evidence_refs[:30],
+                    "evidence_refs": claim_refs[:20],
                 }
             )
         ctx.claim_assessments = claim_assessments
