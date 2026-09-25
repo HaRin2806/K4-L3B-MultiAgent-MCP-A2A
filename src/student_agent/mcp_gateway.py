@@ -24,14 +24,17 @@ class EvidenceGateway:
     async def call(self, tool_name: str, *, case_id: str, **arguments: str) -> dict[str, Any]:
         payload = {"case_id": case_id, **arguments}
         result = await self._session.call_tool(tool_name, arguments=payload)
-        if result.isError:
+        is_error = getattr(result, "is_error", None)
+        if is_error is None:
+            is_error = getattr(result, "isError", False)
+        if is_error:
             message = " ".join(
                 block.text for block in result.content if getattr(block, "text", None)
             )
             raise RuntimeError(f"MCP tool {tool_name} failed: {message or 'unknown error'}")
-        evidence = getattr(result, "structuredContent", None)
+        evidence = getattr(result, "structured_content", None)
         if evidence is None:
-            evidence = getattr(result, "structured_content", None)
+            evidence = getattr(result, "structuredContent", None)
         if evidence is None:
             text_blocks = [block.text for block in result.content if getattr(block, "text", None)]
             if len(text_blocks) != 1:
@@ -47,8 +50,9 @@ async def connect_gateway(
 ) -> AsyncIterator[EvidenceGateway]:
     headers = {"Authorization": f"Bearer {team_api_key}"}
     timeout = httpx2.Timeout(300.0, connect=30.0, write=30.0, pool=30.0)
+    limits = httpx2.Limits(max_keepalive_connections=0, max_connections=50)
     async with (
-        httpx2.AsyncClient(headers=headers, timeout=timeout) as http_client,
+        httpx2.AsyncClient(headers=headers, timeout=timeout, limits=limits) as http_client,
         streamable_http_client(endpoint, http_client=http_client) as (read_stream, write_stream),
         ClientSession(read_stream, write_stream) as session,
     ):
