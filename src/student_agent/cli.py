@@ -59,7 +59,7 @@ async def _run(root: Path) -> None:
             )
             temporary.replace(target)
             trace.emit(case_id=case_id, event_type="case_finalized", actor="coordinator")
-            print(f"[{index:03d}/{total:03d}] {case_id}: {output.get('primary_issue')} (conf={output.get('confidence_score')})", flush=True)
+            print(f"[{index:03d}/{total:03d}] {case_id}: {output.get('assessment', {}).get('primary_issue')} (refund={output.get('financial_resolution', {}).get('recommended_refund_brl')})", flush=True)
 
 
 def parser() -> argparse.ArgumentParser:
