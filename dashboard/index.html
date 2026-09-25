@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A2A Dispute Sentinel // L3B Multi-Agent MCP Dashboard</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-info">
+          <h1>A2A DISPUTE SENTINEL</h1>
+          <p>L3B Multi-Agent MCP Arbitration Pipeline • Day09 Competition</p>
+        </div>
+      </div>
+
+      <!-- Master Score Badge -->
+      <div class="score-badge-master">
+        <div class="score-sparkle">🏆</div>
+        <div class="score-number-group">
+          <div class="score-label">Verified Competition Score</div>
+          <div class="score-value">91.8933 <span style="font-size: 1rem; color: var(--accent-emerald);">/ 100</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs-wrapper">
+    <div class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-architecture">
+        <span>🌐</span> Kiến Trúc Hệ Thống (A2A)
+      </button>
+      <button class="tab-btn" data-tab="tab-explorer">
+        <span>🔬</span> Khám Phá 100 Ca Tranh Chấp
+      </button>
+      <button class="tab-btn" data-tab="tab-simulation">
+        <span>⚡</span> Giả Lập Luồng Hoạt Động (Live)
+      </button>
+      <button class="tab-btn" data-tab="tab-benchmark">
+        <span>📈</span> Phân Tích Điểm Số & Tối Ưu
+      </button>
+      <button class="tab-btn" data-tab="tab-gates">
+        <span>🛡️</span> Thẩm Định 5 Hard Gates
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Workspace -->
+  <main class="main-container">
+
+    <!-- KPI / Telemetry Pill Grid -->
+    <section class="telemetry-pill-grid">
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">Hiệu Quả Gọi Tool</span>
+        <span class="stat-pill-value" style="color: var(--accent-emerald);">92.03</span>
+        <span class="stat-pill-sub">4.0 calls/case avg</span>
+      </div>
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">Độ Đúng Ngữ Nghĩa</span>
+        <span class="stat-pill-value" style="color: var(--accent-blue);">90.96</span>
+        <span class="stat-pill-sub">10/10 nhóm lỗi chuẩn</span>
+      </div>
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">Calibration Score</span>
+        <span class="stat-pill-value" style="color: var(--accent-purple);">93.68</span>
+        <span class="stat-pill-sub">Conf: 0.95 calibrated</span>
+      </div>
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">Bằng Chứng Audit</span>
+        <span class="stat-pill-value" style="color: var(--accent-cyan);">93.91</span>
+        <span class="stat-pill-sub">100% Authoritative</span>
+      </div>
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">A2A Workflow</span>
+        <span class="stat-pill-value" style="color: var(--accent-indigo);">93.91</span>
+        <span class="stat-pill-sub">1,400 trace events</span>
+      </div>
+      <div class="glass stat-pill">
+        <span class="stat-pill-label">Schema & Format</span>
+        <span class="stat-pill-value" style="color: var(--accent-emerald);">93.91</span>
+        <span class="stat-pill-sub">100/100 Valid JSON</span>
+      </div>
+    </section>
+
+    <!-- TAB 1: ARCHITECTURE & A2A TOPOLOGY -->
+    <div id="tab-architecture" class="tab-pane active">
+      <div class="glass canvas-container">
+        <div class="canvas-header">
+          <div>
+            <div class="canvas-title">Sơ Đồ Tương Tác Đa Tác Tử (A2A) & MCP Evidence Gateway</div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+              Kiến trúc phân rã quyền hạn tối thiểu (Least-Privilege) với 6 tác tử chuyên trách giao tiếp qua giao thức Handoff.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <span class="glass-pill" style="padding: 0.3rem 0.8rem; font-size: 0.75rem; color: var(--accent-emerald); font-weight: 600;">
+              ● MCP Gateway Connected
+            </span>
+            <span class="glass-pill" style="padding: 0.3rem 0.8rem; font-size: 0.75rem; color: var(--accent-blue); font-weight: 600;">
+              6 Active Specialists
+            </span>
+          </div>
+        </div>
+
+        <!-- SVG Architecture Topology Graph -->
+        <div class="svg-diagram-wrapper">
+          <svg id="architecture-svg" viewBox="0 0 1100 480">
+            <defs>
+              <linearGradient id="grad-coord" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+              <linearGradient id="grad-mcp" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#0e7490"/>
+              </linearGradient>
+              <linearGradient id="grad-specialist" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#6d28d9"/>
+              </linearGradient>
+              <linearGradient id="grad-policy" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#b45309"/>
+              </linearGradient>
+              <linearGradient id="grad-verifier" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#047857"/>
+              </linearGradient>
+
+              <!-- Arrowhead Marker -->
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+              </marker>
+              <marker id="arrow-active" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+              </marker>
+            </defs>
+
+            <!-- Grid Background Lines -->
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+
+            <!-- Connecting Lines -->
+            <!-- Input to Coordinator -->
+            <path d="M 80 240 L 160 240" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-active)" stroke-dasharray="4"/>
+            
+            <!-- Coordinator to Specialists -->
+            <path d="M 280 210 C 330 160, 360 110, 420 110" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 280 240 L 420 240" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 280 270 C 330 320, 360 370, 420 370" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- Specialists to Policy Agent -->
+            <path d="M 580 110 C 640 110, 670 190, 710 220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 580 240 L 710 240" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 580 370 C 640 370, 670 290, 710 260" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- Policy Agent to Verifier -->
+            <path d="M 830 240 L 900 240" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-active)"/>
+
+            <!-- Verifier to Output -->
+            <path d="M 1020 240 L 1070 240" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-active)" stroke-dasharray="4"/>
+
+            <!-- Central MCP Gateway bidirectional data links -->
+            <path d="M 500 160 L 500 190" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3"/>
+            <path d="M 500 290 L 500 320" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3"/>
+            <path d="M 220 190 C 220 90, 450 50, 490 60" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3"/>
+            <path d="M 770 190 C 770 100, 560 60, 510 60" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3"/>
+
+            <!-- Node 0: Raw Case Input -->
+            <g transform="translate(10, 215)">
+              <rect width="70" height="50" rx="8" fill="#131a2e" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="35" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="Inter">JSON</text>
+              <text x="35" y="38" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">INPUT</text>
+            </g>
+
+            <!-- Node 1: Coordinator Router -->
+            <g class="agent-node" data-agent="coordinator" transform="translate(160, 195)">
+              <rect width="120" height="90" rx="12" fill="url(#grad-coord)" filter="drop-shadow(0 0 10px rgba(59,130,246,0.3))"/>
+              <text x="60" y="32" text-anchor="middle" font-size="20">👑</text>
+              <text x="60" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Coordinator</text>
+              <text x="60" y="68" text-anchor="middle" fill="#bfdbfe" font-size="9">Entity Resolution</text>
+            </g>
+
+            <!-- Node 2: Order & Item Specialist -->
+            <g class="agent-node" data-agent="order" transform="translate(420, 65)">
+              <rect width="160" height="90" rx="12" fill="url(#grad-specialist)" filter="drop-shadow(0 0 10px rgba(139,92,246,0.3))"/>
+              <text x="80" y="32" text-anchor="middle" font-size="18">📦</text>
+              <text x="80" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">OrderItem Agent</text>
+              <text x="80" y="68" text-anchor="middle" fill="#ddd6fe" font-size="9">Items, Sellers, Limits</text>
+            </g>
+
+            <!-- Node 3: Shipment Specialist -->
+            <g class="agent-node" data-agent="shipment" transform="translate(420, 195)">
+              <rect width="160" height="90" rx="12" fill="url(#grad-specialist)" filter="drop-shadow(0 0 10px rgba(139,92,246,0.3))"/>
+              <text x="80" y="32" text-anchor="middle" font-size="18">🚚</text>
+              <text x="80" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Shipment Agent</text>
+              <text x="80" y="68" text-anchor="middle" fill="#ddd6fe" font-size="9">Carrier vs Seller Delays</text>
+            </g>
+
+            <!-- Node 4: Payment Specialist -->
+            <g class="agent-node" data-agent="payment" transform="translate(420, 325)">
+              <rect width="160" height="90" rx="12" fill="url(#grad-specialist)" filter="drop-shadow(0 0 10px rgba(139,92,246,0.3))"/>
+              <text x="80" y="32" text-anchor="middle" font-size="18">💳</text>
+              <text x="80" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Payment Agent</text>
+              <text x="80" y="68" text-anchor="middle" fill="#ddd6fe" font-size="9">Reconciliation & Refunds</text>
+            </g>
+
+            <!-- Node 5: Policy Arbiter -->
+            <g class="agent-node" data-agent="policy" transform="translate(710, 195)">
+              <rect width="120" height="90" rx="12" fill="url(#grad-policy)" filter="drop-shadow(0 0 10px rgba(245,158,11,0.3))"/>
+              <text x="60" y="32" text-anchor="middle" font-size="18">⚖️</text>
+              <text x="60" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Policy Agent</text>
+              <text x="60" y="68" text-anchor="middle" fill="#fde68a" font-size="9">EC_POLICY_V2 Arbiter</text>
+            </g>
+
+            <!-- Node 6: Verifier Agent -->
+            <g class="agent-node" data-agent="verifier" transform="translate(900, 195)">
+              <rect width="120" height="90" rx="12" fill="url(#grad-verifier)" filter="drop-shadow(0 0 10px rgba(16,185,129,0.3))"/>
+              <text x="60" y="32" text-anchor="middle" font-size="18">🛡️</text>
+              <text x="60" y="52" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Verifier Agent</text>
+              <text x="60" y="68" text-anchor="middle" fill="#a7f3d0" font-size="9">Invariants & Schema</text>
+            </g>
+
+            <!-- Node 7: Verified Output -->
+            <g transform="translate(1050, 215)">
+              <rect width="50" height="50" rx="8" fill="#131a2e" stroke="#10b981" stroke-width="1.5"/>
+              <text x="25" y="25" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter">JSON</text>
+              <text x="25" y="38" text-anchor="middle" fill="#10b981" font-size="10" font-weight="bold">OUTPUT</text>
+            </g>
+
+            <!-- Node 8: Central Evidence Gateway Badge -->
+            <g transform="translate(450, 15)">
+              <rect width="100" height="30" rx="15" fill="url(#grad-mcp)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <text x="50" y="19" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">MCP GATEWAY</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Detailed Agent Responsibilities Cards -->
+        <div class="agent-drawer">
+          <div class="glass agent-card-mini active" data-agent-target="coordinator">
+            <div class="agent-card-header">
+              <span class="agent-name">👑 Coordinator / Router</span>
+              <span class="agent-role-tag">Router</span>
+            </div>
+            <p class="agent-desc">
+              Phân tích yêu cầu khách hàng, xác định nhóm tranh chấp cốt lõi, lọc các candidate rác và phân giải Order ID thực tế qua MCP `get_order`.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">get_order</span>
+              <span class="tool-chip">resolve_candidates</span>
+            </div>
+          </div>
+
+          <div class="glass agent-card-mini" data-agent-target="order">
+            <div class="agent-card-header">
+              <span class="agent-name">📦 OrderItem Specialist</span>
+              <span class="agent-role-tag">Domain Agent</span>
+            </div>
+            <p class="agent-desc">
+              Thu thập cấu trúc mặt hàng, thông tin seller, kiểm tra shipping limit dates và phát hiện xung đột dữ liệu giữa các phiên bản.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">get_order_items</span>
+              <span class="tool-chip">get_sellers</span>
+            </div>
+          </div>
+
+          <div class="glass agent-card-mini" data-agent-target="shipment">
+            <div class="agent-card-header">
+              <span class="agent-name">🚚 Shipment Specialist</span>
+              <span class="agent-role-tag">Domain Agent</span>
+            </div>
+            <p class="agent-desc">
+              Đối chiếu timeline vận chuyển: phân định thời điểm giao hàng của seller vs thời điểm giao của carrier để xác định đúng bên chịu lỗi.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">get_shipment_summary</span>
+            </div>
+          </div>
+
+          <div class="glass agent-card-mini" data-agent-target="payment">
+            <div class="agent-card-header">
+              <span class="agent-name">💳 Payment Specialist</span>
+              <span class="agent-role-tag">Domain Agent</span>
+            </div>
+            <p class="agent-desc">
+              Đối soát toàn diện các dòng thanh toán, voucher, kiểm tra trùng lặp phí, tính toán số tiền đã thu và số dư khả hoàn.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">get_order_payments</span>
+              <span class="tool-chip">get_payment_timeline</span>
+              <span class="tool-chip">get_refund_timeline</span>
+            </div>
+          </div>
+
+          <div class="glass agent-card-mini" data-agent-target="policy">
+            <div class="agent-card-header">
+              <span class="agent-name">⚖️ Policy Arbiter</span>
+              <span class="agent-role-tag">Decision Engine</span>
+            </div>
+            <p class="agent-desc">
+              Áp dụng bộ quy tắc có thẩm quyền `EC_POLICY_V2` từ MCP Gateway, chốt lỗi vi phạm cốt lõi, bên chịu trách nhiệm và mức tiền hoàn chính xác.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">get_policy</span>
+              <span class="tool-chip">EC_POLICY_V2</span>
+            </div>
+          </div>
+
+          <div class="glass agent-card-mini" data-agent-target="verifier">
+            <div class="agent-card-header">
+              <span class="agent-name">🛡️ Verifier Agent</span>
+              <span class="agent-role-tag">Quality Gate</span>
+            </div>
+            <p class="agent-desc">
+              Kiểm tra độc lập tính nhất quán logic đa trường, đảm bảo tiền hoàn không vượt quá tiền thu, khử trùng ID và xác thực JSON Schema L3B.
+            </p>
+            <div class="agent-tools-list">
+              <span class="tool-chip">contracts.validate</span>
+              <span class="tool-chip">confidence_calibration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: 100-CASE DISPUTE EXPLORER -->
+    <div id="tab-explorer" class="tab-pane">
+      <div class="explorer-layout">
+        <!-- Sidebar Cases List -->
+        <div class="glass cases-sidebar">
+          <input type="text" id="case-search-input" class="search-box" placeholder="🔍 Tìm Case ID, Order ID, lỗi...">
+          
+          <div class="category-filter-scroll" id="cat-filters">
+            <button class="cat-pill active" data-cat="all">Tất cả (100)</button>
+            <button class="cat-pill" data-cat="late_delivery_logistics">Logistics Delay (10)</button>
+            <button class="cat-pill" data-cat="late_delivery_seller">Seller Delay (10)</button>
+            <button class="cat-pill" data-cat="canceled_order_paid">Canceled Paid (10)</button>
+            <button class="cat-pill" data-cat="unavailable_order_paid">Unavailable Paid (10)</button>
+            <button class="cat-pill" data-cat="duplicate_charge">Duplicate Charge (10)</button>
+            <button class="cat-pill" data-cat="payment_mismatch">Payment Mismatch (10)</button>
+            <button class="cat-pill" data-cat="refund_failed">Refund Failed (10)</button>
+            <button class="cat-pill" data-cat="refund_pending">Refund Pending (10)</button>
+            <button class="cat-pill" data-cat="valid_split_payment">Valid Split (10)</button>
+            <button class="cat-pill" data-cat="unsupported_claim">Unsupported (10)</button>
+          </div>
+
+          <div class="cases-list" id="cases-list-container">
+            <!-- Dynamic case items will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Case Detail Pane -->
+        <div class="glass case-detail-pane" id="case-detail-pane">
+          <!-- Dynamic details will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: LIVE SIMULATOR -->
+    <div id="tab-simulation" class="tab-pane">
+      <div class="glass sim-controls">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="font-weight: 700; font-family: var(--font-display);">Chọn Ca Để Giả Lập:</span>
+          <select id="sim-case-select" class="search-box" style="width: auto; padding: 0.4rem 1rem;">
+            <!-- Options populated dynamically -->
+          </select>
+          <button class="btn btn-primary" id="btn-run-sim">
+            <span>▶</span> Khởi Chạy Mô Phỏng A2A
+          </button>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+          Mô phỏng chu trình thực tế từ <code style="color: var(--accent-cyan);">trace.jsonl</code>
+        </div>
+      </div>
+
+      <!-- Simulation Visual Timeline -->
+      <div class="glass" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="sim-timeline">
+          <div class="sim-step" id="sim-step-1">
+            <div class="sim-step-icon">1</div>
+            <span class="sim-step-title">Case Received</span>
+          </div>
+          <div class="sim-step" id="sim-step-2">
+            <div class="sim-step-icon">2</div>
+            <span class="sim-step-title">Task Assigned</span>
+          </div>
+          <div class="sim-step" id="sim-step-3">
+            <div class="sim-step-icon">3</div>
+            <span class="sim-step-title">Tool Consumed</span>
+          </div>
+          <div class="sim-step" id="sim-step-4">
+            <div class="sim-step-icon">4</div>
+            <span class="sim-step-title">A2A Handoff</span>
+          </div>
+          <div class="sim-step" id="sim-step-5">
+            <div class="sim-step-icon">5</div>
+            <span class="sim-step-title">Policy Decided</span>
+          </div>
+          <div class="sim-step" id="sim-step-6">
+            <div class="sim-step-icon">6</div>
+            <span class="sim-step-title">Verified & Final</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Terminal Event Stream -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot dot-red"></div>
+            <div class="terminal-dot dot-yellow"></div>
+            <div class="terminal-dot dot-green"></div>
+          </div>
+          <div>A2A AUDIT EVENT STREAM // REAL-TIME TRACE</div>
+          <div id="sim-event-counter">0 events</div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="log-entry">
+            <span class="log-time">[System]</span>
+            <span class="log-details">Nhấn "Khởi Chạy Mô Phỏng A2A" để xem toàn bộ luồng sự kiện đa tác tử được replay trực tiếp từ nhật ký kiểm toán trace.jsonl.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: BENCHMARK & OPTIMIZATION REPORT -->
+    <div id="tab-benchmark" class="tab-pane">
+      <div class="benchmark-grid">
+        <!-- Main Comparison Card -->
+        <div class="glass chart-card">
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #ffffff;">
+            So Sánh Điểm Số: Trước và Sau Khi Tối Ưu
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Hệ thống bứt phá thêm <strong>+13.58 điểm</strong> nhờ tái thiết kế Dynamic Routing và bảng luật chuẩn `EC_POLICY_V2`.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+            <!-- Metric 1: Efficiency -->
+            <div class="bar-comparison-item">
+              <div class="bar-meta">
+                <span style="font-weight: 600;">Hiệu Quả Gọi Tool (Efficiency)</span>
+                <span>28.59 ➔ <strong style="color: var(--accent-emerald);">92.03 (+63.44)</strong></span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-new" style="width: 92%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 2: Semantic -->
+            <div class="bar-comparison-item">
+              <div class="bar-meta">
+                <span style="font-weight: 600;">Độ Đúng Ngữ Nghĩa (Semantic Accuracy)</span>
+                <span>69.53 ➔ <strong style="color: var(--accent-blue);">90.96 (+21.43)</strong></span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-new" style="width: 91%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 3: Calibration -->
+            <div class="bar-comparison-item">
+              <div class="bar-meta">
+                <span style="font-weight: 600;">Độ Tin Cậy Chuẩn Xác (Calibration)</span>
+                <span>79.45 ➔ <strong style="color: var(--accent-purple);">93.68 (+14.23)</strong></span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-new" style="width: 93.6%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 4: Evidence Coverage -->
+            <div class="bar-comparison-item">
+              <div class="bar-meta">
+                <span style="font-weight: 600;">Độ Bao Phủ Bằng Chứng (Evidence Coverage)</span>
+                <span>83.10 ➔ <strong style="color: var(--accent-cyan);">89.03 (+5.93)</strong></span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-new" style="width: 89%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 5: Provenance & Consistency & Workflow -->
+            <div class="bar-comparison-item">
+              <div class="bar-meta">
+                <span style="font-weight: 600;">Provenance, Consistency, Schema, Workflow</span>
+                <span>93.24 ➔ <strong style="color: #ffffff;">93.91 (Cực Cao)</strong></span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-new" style="width: 94%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tool Calls Reduction Card -->
+        <div class="glass chart-card">
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #ffffff;">
+            Tối Ưu Ngân Sách Tool Calls (Calls/Case)
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Giảm 57.4% lượng request dư thừa lên server, tránh hình phạt vượt ngưỡng ngân sách cuộc thi.
+          </p>
+
+          <div style="display: flex; align-items: center; justify-content: space-around; padding: 1.5rem 0;">
+            <div style="text-align: center;">
+              <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: #94a3b8;">9.4</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Trước Tối Ưu (940 calls)</div>
+            </div>
+            <div style="font-size: 1.5rem; color: var(--accent-emerald);">➔</div>
+            <div style="text-align: center;">
+              <div style="font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; color: var(--accent-emerald);">4.0</div>
+              <div style="font-size: 0.8rem; color: var(--text-emerald); font-weight: 600;">Sau Tối Ưu (400 calls)</div>
+            </div>
+          </div>
+
+          <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+            💡 <strong>Quy luật chấm thi:</strong> Mỗi case có <em>per-case call budget</em> (~4 calls). Việc loại bỏ các tool gọi mò (`get_product_context`, `get_customer_history`) khi không cần thiết đã giúp điểm số bùng nổ mà vẫn giữ 100% bằng chứng chính xác.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: 5 HARD GATES AUDIT -->
+    <div id="tab-gates" class="tab-pane">
+      <div class="glass" style="padding: 1.5rem;">
+        <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">
+          Thẩm Định 5 Hard Gates Bắt Buộc Của Ban Giám Khảo
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          Tất cả 5 bài kiểm tra nghiêm ngặt ngăn chặn nguy cơ bị nhận điểm 0 đã được thẩm định tự động và đạt chuẩn 100%.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          <div class="glass detail-card" style="border-left: 4px solid var(--accent-emerald);">
+            <div style="font-weight: 700; color: #ffffff;">GATE 1: Case IDs & 100 Outputs</div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              Đúng đủ 100 files trong thư mục `outputs/`, tên file và trường `case_id` bên trong khớp tuyệt đối 100% với danh sách trong `case-set.json`.
+            </p>
+            <span class="badge badge-success" style="align-self: flex-start;">PASSED (100/100)</span>
+          </div>
+
+          <div class="glass detail-card" style="border-left: 4px solid var(--accent-emerald);">
+            <div style="font-weight: 700; color: #ffffff;">GATE 2: JSON Schema L3B</div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              100% outputs tuân thủ `l3b-output-v2.schema.json` với `additionalProperties: false`, đúng định dạng enums, và các mảng ID độc nhất (`uniqueItems: true`).
+            </p>
+            <span class="badge badge-success" style="align-self: flex-start;">PASSED (0 Lỗi Schema)</span>
+          </div>
+
+          <div class="glass detail-card" style="border-left: 4px solid var(--accent-emerald);">
+            <div style="font-weight: 700; color: #ffffff;">GATE 3: Bằng Chứng Bắt Buộc</div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              Toàn bộ 100 ca tranh chấp và các nhận định trong `claim_assessments` đều có mảng `evidence_refs` hợp lệ, không có mảng rỗng `[]`.
+            </p>
+            <span class="badge badge-success" style="align-self: flex-start;">PASSED (400 Refs)</span>
+          </div>
+
+          <div class="glass detail-card" style="border-left: 4px solid var(--accent-emerald);">
+            <div style="font-weight: 700; color: #ffffff;">GATE 4: MCP Audit Provenance</div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              100% bằng chứng trích xuất từ server Gateway thật, có mặt trong sự kiện `tool_result_consumed` của đúng case đó, tuyệt đối không fake hay chéo case.
+            </p>
+            <span class="badge badge-success" style="align-self: flex-start;">PASSED (100% Khớp Audit)</span>
+          </div>
+
+          <div class="glass detail-card" style="border-left: 4px solid var(--accent-emerald);">
+            <div style="font-weight: 700; color: #ffffff;">GATE 5: Cấu Trúc File ZIP Phẳng</div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              Tệp `dist/submission.zip` chỉ chứa đúng 3 thành phần tại gốc: `manifest.json`, `trace.jsonl`, và `outputs/`. Không có folder bọc ngoài, không chứa `.env`.
+            </p>
+            <span class="badge badge-success" style="align-self: flex-start;">PASSED (157 KB / <12MB)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Load bundled case data & application logic -->
+  <script src="cases_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
